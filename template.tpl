@@ -14,7 +14,6 @@ ___INFO___
   "version": 1,
   "securityGroups": [],
   "displayName": "Web Vitals",
-  "categories": ["ANALYTICS"],
   "brand": {
     "id": "brand_dummy",
     "displayName": "demirj",
@@ -226,10 +225,9 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 const injectScript = require('injectScript');
 const copyFromWindow = require('copyFromWindow');
 const createQueue = require('createQueue');
-const JSON = require('JSON');
 const log = require('logToConsole');
 
-// Variables holding information from user input
+// Variables storing information from user input
 const packageBuild = (data.build === 'standard') ? 'https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js' : 'https://unpkg.com/web-vitals@3/dist/web-vitals.attribution.iife.js';
 const libraryUrl = data.customURL || packageBuild;
 const measureAllMetrics = data.metrics === 'allMetrics';
@@ -306,10 +304,6 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "https://unpkg.com/web-vitals*"
-              },
-              {
-                "type": 1,
-                "string": "https://www.mydomain.com/files/webVitals.js"
               }
             ]
           }
@@ -452,6 +446,6 @@ scenarios: []
 
 ___NOTES___
 
-Created on 7/7/2023, 4:06:31 PM
+Created on 7/10/2023, 9:04:30 AM
 
 

@@ -20,7 +20,7 @@ Before you start, you will require the following:
 -  A Google Tag Manager account and container
 -  A Google Analytics 4 account and property
 
-Follow [this instructions to set up and install Google Tag Manager](https://developers.google.com/tag-platform/tag-manager/web). With the help of [this Analytics helpcenter guide](https://support.google.com/analytics/answer/9304153) you can create an Analytics account and a new Google Analytics 4 property.
+Follow [these instructions to set up and install Google Tag Manager](https://developers.google.com/tag-platform/tag-manager/web). With the help of [this Analytics help center guide](https://support.google.com/analytics/answer/9304153) you can create an Analytics account and a new Google Analytics 4 property.
 
 ## Getting Web Vitals Template into Google Tag Manager
 
@@ -34,7 +34,7 @@ To get started, you first need to import the template into your Google Tag Manag
 
 ## Deploying the Web Vitals Template
 
-After you have imported the Tamplate into your Google Tag Manager Container head to the tag section of the container. Click on "New" and select the Web Vitals Tag. You will find the Tag within the custom tag section.
+After you have imported the Template into your Google Tag Manager Container head to the tag section of the container. Click on "New" and select the Web Vitals Tag. You will find the Tag within the custom tag section.
 
 ![Web Vitals Tag](docs/img/web-vitals-gtm-2.PNG)
 
@@ -46,7 +46,7 @@ For a **quick start** you can leave the default settings as they are and just ad
 
 For a **customized setup** you have different options to choose from:
 
-- **Choose how to load the library:** You can load the web vitals library from the unpkg.com CDN or use a custom URL to load the library. **[For the latter please consider this instructions.](#load-library-from-a-custom-url)**
+- **Choose how to load the library:** You can load the web vitals library from the unpkg.com CDN or use a custom URL to load the library. **[For the latter please consider these instructions.](#load-library-from-a-custom-url)**
 - **Build options:** When loading the library from the unpkg.com CDN you can choose between two different [build options](https://github.com/GoogleChrome/web-vitals#build-options). To get started use the standard built, to collect additional diagnostic information use the attribution build.
 - **Metrics configuration:** Choose which metrics you want to measure. You can measure all metrics. Alternatively choose separately between the following metrics.
     + [Cumulative Layout Shift (CLS)](https://web.dev/cls/)
@@ -57,7 +57,7 @@ For a **customized setup** you have different options to choose from:
     + [Time to First Byte (TTFB)](https://web.dev/ttfb/)
 - **Event name:** Per default for every push of web vitals data into the [data layer](https://developers.google.com/tag-platform/tag-manager/datalayer) of Google Tag Manager an event property with the name "webVitals" will be added. If you want to rename that event name, you can configure it here.
 
-After your cusomization add the "All Pages" trigger to the Tag.
+After your customization add the "All Pages" trigger to the Tag.
 
 ### Debugging
 
@@ -99,16 +99,27 @@ In the Google Tag Manager UI, go to "Triggers" and create a new trigger from typ
 
 ### Create the data layer variables
 
-To access web vitals data from the data layer and to send those data as event parameters to GA4 you will need to create correspoinding data layer variables in the Google Tag Manager Container. Example: To collect the metric name and value you have to set up following data layer variables.
+To access web vitals data from the data layer and to send those data as event parameters to GA4 you will need to create corresponding data layer variables in the Google Tag Manager Container. Example: To collect the metric name and value you have to set up the following data layer variables.
 
 ![Web Vitals Tag](docs/img/web-vitals-gtm-8.PNG)
 ![Web Vitals Tag](docs/img/web-vitals-gtm-9.PNG)
+![Web Vitals Tag](docs/img/web-vitals-gtm-10.PNG)
+
+***Important note: "rating" and "delta" are important data that need to be sent in order for GA4 reporting and Looker Studio Dashboard to work properly. But please feel free to send additional data from the data layer.***
 
 ### Create a GA4 Tag
 
-To send the data to GA4 you have to create a GA4 Event Tag. You can name the event as "web_vitals", set up event parameters and choose the created trigger to make the tag fire.
+To send the data to GA4 you have to create a GA4 Event Tag. You can name the event as "web_vitals" or "core_web_vitals", set up event parameters and choose the created trigger to make the tag fire.
 
-![Web Vitals Tag](docs/img/web-vitals-gtm-10.PNG)
+![Web Vitals Tag](docs/img/web-vitals-gtm-11.PNG)
 
-For a more comprehensive instructions please [visit this guide](https://www.simoahava.com/analytics/track-core-web-vitals-in-ga4-with-google-tag-manager/#create-the-google-tag-manager-trigger-and-variables).
+***Important note: Please make sure to fire this Tag based on the user consent choice.***
+
+After successful implementation you can see the web vitals GA4 event in the realtime report immediately:
+
+![Web Vitals Tag](docs/img/web-vitals-gtm-12.PNG)
+
+Please note that data in Google Analytics is processed with a delay of 24-48 hours. To analyze your collected web vitals data you may have to wait up to 48 hours. After that period you can analyze your data through standard reports and the GA4 explorations. Example data in standard event report:
+
+![Web Vitals Tag](docs/img/web-vitals-gtm-13.PNG)
 

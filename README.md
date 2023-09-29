@@ -55,7 +55,7 @@ For a **customized setup** you have different options to choose from:
     + [Interaction to next Paint (INP)](https://web.dev/inp/)
     + [First Contentful Paint (FCP)](https://web.dev/fcp/)
     + [Time to First Byte (TTFB)](https://web.dev/ttfb/)
-- **Event name:** Per default for every push of web vitals data into the [data layer](https://developers.google.com/tag-platform/tag-manager/datalayer) of Google Tag Manager an event property with the name "webVitals" will be added. If you want to rename that event name, you can configure it here.
+- **Event name:** Per default for every push of web vitals data into the [data layer](https://developers.google.com/tag-platform/tag-manager/datalayer) of Google Tag Manager an event property with the name "web_vitals" will be added. If you want to rename that event name, you can configure it here.
 
 After your customization add the "All Pages" trigger to the Tag.
 
@@ -109,7 +109,7 @@ To access web vitals data from the data layer and to send those data as event pa
 
 ### Create a GA4 Tag
 
-To send the data to GA4 you have to create a GA4 Event Tag. You can name the event as "web_vitals" or "core_web_vitals", set up event parameters and choose the created trigger to make the tag fire.
+To send the data to GA4 you have to create a GA4 Event Tag. Set the data layer variable of "webVitalsData.name" as an event name, set up event parameters and choose the created trigger to make the tag fire. You can also use a event parameter called "event_category" of "Web Vitals" to group the metrics.
 
 ![Web Vitals Tag](docs/img/web-vitals-gtm-11.PNG)
 

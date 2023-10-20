@@ -49,7 +49,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "customURLWarning",
-    "displayName": "\u003cstrong\u003eCaution: To use this feature, please read the \u003ca href\u003d\"https://github.com/demirj\"\u003einstructions on GitHub\u003c/a\u003e first.\u003c/strong\u003e",
+    "displayName": "\u003cstrong\u003eCaution: To use this feature, please read the \u003ca href\u003d\"https://github.com/google-marketing-solutions/web-vitals-gtm-template#load-library-from-a-custom-url\"\u003einstructions on GitHub\u003c/a\u003e first.\u003c/strong\u003e",
     "enablingConditions": [
       {
         "paramName": "libraryConfig",

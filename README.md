@@ -93,7 +93,7 @@ To send the web vitals data to GA4 you will need to set up a trigger, data layer
 
 ### Create the trigger
 
-In the Google Tag Manager UI, go to "Triggers" and create a new trigger from type "Custom Event". In the event name field you should enter either the custom configured event name for the data layer push or the standard event name "webVitals".
+In the Google Tag Manager UI, go to "Triggers" and create a new trigger from type "Custom Event". In the event name field you should enter either the custom configured event name for the data layer push or the standard event name "web_vitals".
 
 ![Web Vitals Tag](docs/img/web-vitals-gtm-7.PNG)
 

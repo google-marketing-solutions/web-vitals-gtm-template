@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<!--
+Copyright 2023 Google LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deploy the web vitals template</title>
+  <script src="./gtm_automation.js" defer></script>
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <script src="https://apis.google.com/js/api.js" async></script>
+  <style>
+    .deploy-form {
+      display: grid;
+      row-gap: 8px;
+    }
+
+    .submit-button {
+      width: fit-content;
+      padding: 5px;
+    }
+
+    .well {
+      min-height: 20px;
+      padding: 19px;
+      margin-bottom: 20px;
+      background-color: #f5f5f5;
+      border: 1px solid #e3e3e3;
+      border-radius: 4px;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+      display: none;
+    }
+
+    form:has(input.template-choice:checked) .well {
+      display: inline-block;
+    }
+
+    ul.bulletless {
+      list-style: none;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Deploy the Web Vitals GTM Template with GA4</h1>
+  <p>Please fill out the form before clicking the <strong>Deploy To GTM</strong> button.
+    For more information, please see the <a href="TODO">documentation</a>.
+  <form id="deploy-form" class="deploy-form">
+    <label>
+      OAuth Client ID to use:
+      <input type="text" name="oauth-id" id="oauth-id" required>
+    </label>
+    <label>
+      GTM Workspace URL:
+      <input type="text" name="gtm-url" id="gtm-url" required>
+    </label>
+    <label>
+      GA4 Measurement ID:
+      <input type="text" name="ga4-id" id="ga4-id" required>
+    </label>
+    <label>
+      Deploy the template to GTM (uncheck if template already deployed)?
+      <input type="checkbox" name="deploy-template" id="deploy-template" checked class="template-choice">
+    </label>
+    <div class="well">
+      Choose the CWV metrics to report:
+      <ul class="bulletless">
+        <li>
+        <label>
+          TTFB <input type="checkbox" checked name="cwv-TTFB" id="cwv-TTFB">
+        </label>
+      </li>
+      <li>
+        <label>
+          FCP <input type="checkbox" checked name="cwv-FCP" id="cwv-FCP">
+        </label>
+      </li>
+      <li>
+        <label>
+          LCP <input type="checkbox" checked name="cwv-LCP" id="cwv-LCP">
+        </label>
+      </li>
+      <li>
+        <label>
+          CLS <input type="checkbox" checked name="cwv-CLS" id="cwv-CLS">
+        </label>
+      </li>
+      <li>
+        <label>
+          FID <input type="checkbox" checked name="cwv-FID" id="cwv-FID">
+        </label>
+      </li>
+      <li>
+        <label>
+          INP <input type="checkbox" checked name="cwv-INP" id="cwv-INP">
+        </label>
+      </li>
+      </ul>
+      <label>
+        Use attribution build of the web-vitals library?
+        <input type="checkbox" checked name="use-attribution" id="use-attribution">
+      </label>
+    </div>
+    <input type="submit" name="deploy" id="deploy" value="Deploy to GTM" class="submit-button">
+  </form>
+
+</body>
+
+</html>

@@ -48,7 +48,12 @@ limitations under the License.
     }
 
     form:has(input.template-choice:checked) .well {
-      display: inline-block;
+        display: inherit;
+        row-gap: 8px;;
+    }
+
+    div.library-decision:has(input.use-unpkg:checked) .library-url-field {
+        display: none;
     }
 
     ul.bulletless {
@@ -79,6 +84,9 @@ limitations under the License.
       <input type="checkbox" name="deploy-template" id="deploy-template" checked class="template-choice">
     </label>
     <div class="well">
+      <label>
+        Template File <input type="file" id="template-file" name="template-file" accept=".tpl" required>
+      </label>
       Choose the CWV metrics to report:
       <ul class="bulletless">
         <li>
@@ -112,9 +120,23 @@ limitations under the License.
         </label>
       </li>
       </ul>
+      <div class="library-decision">
+        <label id="use-unpkg-check">
+        Use the defaut library from unpkg?
+        <input type="checkbox" checked name="use-unpkg" id="use-unpkg" class="use-unpkg">
+      </label>
+      <label class="library-url-field">
+        URL to fetch the web-vitals.js library from:
+        <input type="text" name="library-url" id="library-url">
+      </label>
+      </div>
       <label>
         Use attribution build of the web-vitals library?
         <input type="checkbox" checked name="use-attribution" id="use-attribution">
+      </label>
+      <label>
+        GTM Event Name:
+        <input type="text" value="webVitals" name="event-name" id="event-name" required>
       </label>
     </div>
     <input type="submit" name="deploy" id="deploy" value="Deploy to GTM" class="submit-button">

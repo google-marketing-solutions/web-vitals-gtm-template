@@ -19,7 +19,7 @@ let tokenClient;
 
 /**
  * Runs the authorization flow to allow the app to use the GTM API. If completed
- * successfully, the template is added to the workspace.
+ * successfully, the deployment of the template, tag, etc. is started.
  *
  * The user will be asked in a pop-up to choose an account to authorise with,
  * and then asked to allow the app to edit GTM containers.
@@ -46,7 +46,7 @@ function authorizeApp(event) {
 
 /**
  * Start point for deploying the template to GTM. The template file is read in
- * here and then passed to createTemplate() to start the process.
+ * here and then passed to createTemplate() to start the deployment workflow.
  */
 function runDeployment() {
   const gtmURL = document.getElementById('gtm-url').value;
@@ -67,7 +67,7 @@ function runDeployment() {
  * If the template is successfully created, the template ID is passed to
  * createTag() to continue the deployment.
  *
- * @param parent {Map<string, string>} The GTM parent being deployed to.
+ * @param parent {string} The GTM parent being deployed to.
  * @param content {string} The content of the template.
  */
 function createTemplate(parent, content) {

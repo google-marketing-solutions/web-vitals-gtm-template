@@ -84,7 +84,7 @@ function createTemplate(parent, content) {
         createTag(parent, templateID);
       })
       .catch((err) => {
-        console.error('Error creating template: ' + err);
+        console.error('Error creating template:', err);
       });
 
   };
@@ -205,10 +205,97 @@ function createTag(parent, templateID) {
   gapi.client.tagmanager.accounts.containers.workspaces.tags.create(tag)
       .then((gtmResp) => {
         console.log("Created the Tag!");
+        createEventTrigger(parent, document.getElementById('event-name'));
       })
     .catch((err) => {
-      console.error('Error creating template: ' + err.result.error.details[0].detail);
+      console.error('Error creating template:', err.result.error.details[0].detail);
     });
+}
+
+
+/**
+ * Creates the trigger that fires when a CWV-related event is received.
+ */
+function createEventTrigger(parent, eventName) {
+  gapi.client.tagmanager.accounts.containers.workspaces.triggers.create({
+    parent: parent,
+    name: 'Web Vitals Event Trigger',
+    type: 'customEvent',
+    customEventFilter: [
+      {
+        type: 'template',
+        key: 'arg0',
+        value: '{{_event}}',
+      },
+      {
+        type: 'template',
+        key: 'arg1',
+        value: eventName,
+      }
+    ]
+  })
+      .then((gtmResp) => {
+        console.log('Created the event trigger!');
+      })
+      .catch((err) => {
+        console.error('Error creating the event trigger', err.result.error.details[0].detail);
+      });
+}
+
+function createDatalayerVariables(parent) {
+  const variableNames = [
+    'name',
+    'id',
+    'rating',
+    'value',
+    'delta',
+  ];
+
+  if (document.getElementById('use-attribution').checked) {
+    variableNames.push('attribution');
+  }
+
+  let count = 0;
+  for (const name of variableNames) {
+    gapi.client.tagmanager.accounts.containers.workspaces.variables.create({
+      parent: parent,
+      resource: {
+        name: 'Web Vitals - ' + name,
+        type: 'v',
+        formatValue: {},
+        parameter: [
+          {
+            type: 'integer',
+            key: 'dataLayerVersion',
+            value: '2',
+          },
+          {
+            type: 'boolean',
+            key: 'setDefaultValue',
+            value: 'false',
+          },
+          {
+            type: 'template',
+            key: 'name',
+            value: 'webVitalsData.' + name,
+          }
+        ],
+      }
+    })
+        .then((gtmResp) => {
+          console.log('Created data layer variable -', name);
+          if (++count === variableNames.length) {
+            console.log('Finished creating variables!');
+          }
+        })
+        .catch((err) => {
+          console.error('Error creating data layer variable -', err.result.details[0].detail);
+        });
+  }
+}
+
+function createGA4EventTag(parent) {
+
 }
 
 document.getElementById('deploy-form').addEventListener('submit', authorizeApp);

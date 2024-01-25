@@ -187,8 +187,8 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "Event name for data layer",
     "radioItems": [
       {
-        "value": "webVitals",
-        "displayValue": "Use predefined event name (\"webVitals\")"
+        "value": "web_vitals",
+        "displayValue": "Use predefined event name (\"web_vitals\")"
       },
       {
         "value": "custom",
@@ -221,18 +221,19 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-// Load all APIs that are needed for this template
+// Load all APIs that are needed for this template.
 const injectScript = require('injectScript');
 const copyFromWindow = require('copyFromWindow');
 const createQueue = require('createQueue');
+const Object = require('Object');
 const log = require('logToConsole');
 
-// Variables storing information from user input
+// Variables storing information from user input.
 const packageBuild = (data.build === 'standard') ? 'https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js' : 'https://unpkg.com/web-vitals@3/dist/web-vitals.attribution.iife.js';
 const libraryUrl = data.customURL || packageBuild;
 const measureAllMetrics = data.metrics === 'allMetrics';
 const dataLayerName = 'dataLayer';
-const eventName = data.customEventName || 'webVitals';
+const eventName = data.customEventName || 'web_vitals';
 
 // Creates an array in window and returns a function that will push values onto that array.
 const dataLayerPush = createQueue(dataLayerName);
@@ -243,21 +244,21 @@ const onFailure = () => {
   data.gtmOnFailure();
 };
 
-// Create the object to push to the data layer
-const pushData = cwvData => {
+// Create the object to push the Core Web Vitals Data to the data layer.
+const pushData = cwvObj => {
   
+  // Remove entries property, otherwise GTM will return null values, because the type of entries is not supported.
+  Object.delete(cwvObj, 'entries');
+  // Store the cleaned object in a new constant.
+  const cwvData = cwvObj;
+  
+  // Create the data layer object.
   const cwvDataLayerObject = {
     'event': eventName,
-    'webVitalsData': {
-      'delta': cwvData.delta,
-      'id': cwvData.id,
-      'name': cwvData.name,
-      'navigationType': cwvData.navigationType,
-      'rating': cwvData.rating,
-      'value': cwvData.value
-    }
+    'webVitalsData': cwvData
   };
   
+  // If user chooses attribution build, then add those data to a attribution property. Only supported types will be added.
   if (data.build === 'attribution') {
     cwvDataLayerObject.webVitalsData.attribution = cwvData.attribution;    
   }
@@ -266,7 +267,7 @@ const pushData = cwvData => {
   
 };
 
-// Load corresponding web vitals functions with a callback function to push data to the data layer 
+// Load corresponding web vitals functions with a callback function to push data to the data layer.
 const loadwebVitals = () => {
   const webVitalsGlobal = copyFromWindow('webVitals');
   if (webVitalsGlobal && typeof webVitalsGlobal === 'object') {

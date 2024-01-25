@@ -258,11 +258,6 @@ const pushData = cwvObj => {
     'webVitalsData': cwvData
   };
   
-  // If user chooses attribution build, then add those data to a attribution property. Only supported types will be added.
-  if (data.build === 'attribution') {
-    cwvDataLayerObject.webVitalsData.attribution = cwvData.attribution;    
-  }
-  
   dataLayerPush(cwvDataLayerObject);
   
 };

@@ -75,3 +75,8 @@ OAuth Client ID. To do so,
     server’s domain. Don’t forget to add http:// or https:// and the port you
     will be serving from (e.g. http://localhost:8080).
 1.  Click the **Save** button to finish.
+
+## Possible Issues
+* Deploying the template a second time results in an **400 BAD REQUEST** error
+  on the first step without any additional context. To remedy this, delete the
+  template from the container and start again.

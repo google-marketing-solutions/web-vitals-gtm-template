@@ -48,8 +48,8 @@ limitations under the License.
     }
 
     form:has(input.template-choice:checked) .well {
-        display: inherit;
-        row-gap: 8px;;
+      display: inherit;
+      row-gap: 8px;
     }
 
     div.library-decision:has(input.use-unpkg:checked) .library-url-field {
@@ -58,6 +58,14 @@ limitations under the License.
 
     ul.bulletless {
       list-style: none;
+    }
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
     }
   </style>
 </head>
@@ -136,11 +144,13 @@ limitations under the License.
       </label>
       <label>
         GTM Event Name:
-        <input type="text" value="webVitals" name="event-name" id="event-name" required>
+        <input type="text" value="web_vitals" name="event-name" id="event-name" required>
       </label>
     </div>
     <input type="submit" name="deploy" id="deploy" value="Deploy to GTM" class="submit-button">
   </form>
+  <div id="success-messages" class="success"></div>
+  <div id="error-messages" class="error"></div>
 
 </body>
 

@@ -47,7 +47,8 @@ function unlockForm() {
 /**
  * Adds a message to the success-messages div on the page.
  *
- * @param {string} message The message to add to the page.
+ * @param {...string} message The message to add to the page. Arguments are joined
+ * with a space.
  */
 function addSuccessMessage(...message) {
   const successDiv = document.getElementById('success-messages');
@@ -59,7 +60,8 @@ function addSuccessMessage(...message) {
  *
  * Also unlocks the form, since the script dies on an error.
  *
- * @param {string} message The error message to add to the page.
+ * @param {...string} message The error message to add to the page. Arguments
+ * are joined with a space.
  */
 function addErrorMessage(...message) {
   const errorDiv = document.getElementById('error-messages');
@@ -75,7 +77,7 @@ function addErrorMessage(...message) {
  * and then asked to allow the app to edit GTM containers.
  *
  * @param {Event} event The event that triggers the function. This event is
- *                      ignored.
+ * ignored.
  */
 function authorizeApp(event) {
   event.preventDefault();
@@ -95,7 +97,7 @@ function authorizeApp(event) {
 }
 
 /**
- * Start point for deploying the template to GTM.
+ * Start point for deploying the template, tags, etc. to GTM.
  *
  * The configuration is collected from the web interface here to centralize
  * where the document is accessed. This config is then passed down the chain as
@@ -124,7 +126,8 @@ function runDeployment() {
   config.set('attributionBuild', document.getElementById('use-attribution').checked);
   config.set('gtmEventName', document.getElementById('event-name').value);
 
-  // get the template content from the user
+  // get the template content from the user. The file chooser is a mandiatory
+  // field.
   const templateFile = document.getElementById('template-file').files[0];
   const templateReader = new FileReader();
   templateReader.addEventListener('load', () => {
@@ -140,7 +143,7 @@ function runDeployment() {
  * If the template is successfully created, the config and the new template ID
  * is passed to createTag() to continue the deployment.
  *
- * @param config {Map<string, *>} The GTM parent being deployed to.
+ * @param config {Map<string, *>} The configuration map.
  * @param content {string} The content of the template.
  */
 function createTemplate(config, content) {
@@ -162,6 +165,8 @@ function createTemplate(config, content) {
       });
 
   };
+  // This is needed for the first API call to show the consent dialog.
+  // Afterwards the API call can be made directly.
   if (gapi.client.getToken() == null) {
     tokenClient.requestAccessToken({ prompt: 'consent' });
   } else {
@@ -176,7 +181,7 @@ function createTemplate(config, content) {
  *
  * @param config {Map<string, *>} The configuration map.
  * @param templateID {string} The ID the template was assigned when it was
- *     created.
+ * created.
  */
 function createTag(config, templateID) {
   const containerID = config.get('parent').split('/')[3];
@@ -291,7 +296,7 @@ function createTag(config, templateID) {
 /**
  * Creates the custom trigger that fires when a CWV-related event is received.
  *
- * If the trigger is successfully created, `createDatalayerVariables` is called.
+ * If the trigger is successfully created, createDatalayerVariables() is called.
  *
  * @param {Map<string, *>} config The configuration map.
  */
@@ -336,12 +341,11 @@ function createEventTrigger(config) {
  * 'attribution' is pushed on to the array if an attribution build is being
  * used.
  *
- * If the variables are all created successfully, `createGA4EventTag` is called.
+ * If the variables are all created successfully, createGA4EventTag() is called.
  *
  * @param {Map<string, *}> config The configuration map.
  */
 function createDatalayerVariables(config) {
-
   if (config.get('attributionBuild')) {
     VariableNames.push('attribution');
   }
@@ -393,8 +397,8 @@ function createDatalayerVariables(config) {
  * to the `VariableNames` array before this is called (should happen when the
  * data layer variables are created).
  *
- * If the tag is successfully created, a success message is displayed and the
- * workflow ends.
+ * If the tag is successfully created, a success message is displayed the
+ * workflow ends and the form is enabled.
  *
  * @param {Map<string, *}> config The configuration map.
  */

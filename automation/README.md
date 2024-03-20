@@ -20,13 +20,13 @@ Vitals data collected via the template to GA4.
 The steps the solution automates are:
 
 1. Optionally deploy the CWV template to GTM.
-1. If the template is deployed, configure it appropriately.
+  1. If the template is deployed, configure it appropriately.
 1. Creates a custom trigger for CWV events.
 1. Creates the data-layer variables used to store CWV measurements.
 1. Deploys a GA4 event tag to send the CWV data to GA4.
 
 Using the automation ensures that all of the variables are properly named and
-the events are properly linked to the triggers.  
+the events are properly linked to the triggers.
 
 ## Prerequisites
 
@@ -37,6 +37,8 @@ Using the template automation requires the following:
 * The URL of the Google Tag Manager Workspace where the tag will be deployed
   to.
 * The GA4 Measurement ID of the GA4 property to send the CWV measurements to.
+* Enabling the tagmanager API in your Cloud Project (see Enabling the tagmanager
+  API below).
 
 ### Getting an OAuth ID An OAuth ID is required to authenticate with the GTM API
     when deploying the GTM tags, etc. Before creating an OAuth ID, you will
@@ -54,9 +56,9 @@ choose _APIs & Services >> OAuth consent screen_, then follow these steps:
 1.  Fill in the _App name_, _User support email_, and _Developer contact
     information > Email address_ fields in the form. Click the **+ ADD DOMAIN**
     button and add `http://localhost:<PORT NUMBER>` replacing &lt;PORT
-    NUMBER&gt; with the port you will run your webserver on locally (often 8000
-    or 8080). If you plan on serving the page on a public webserver, us the
-    address of that webserver instead.
+    NUMBER&gt; with the port you will run your web server on locally (often 8000
+    or 8080). If you plan on serving the page on a public web server, us the
+    address of that web server instead.
 1.  Click the **Save and Continue** button and then, on the Scopes page, click
     **Save and Continue** again.
 
@@ -76,7 +78,73 @@ OAuth Client ID. To do so,
     will be serving from (e.g. http://localhost:8080).
 1.  Click the **Save** button to finish.
 
+### Enabling the tagmanager API
+
+Enabling the tagmanager API for your Google Cloud project is necessary for
+allowing the solution to make changes to your Tag Manager workspaces. To enable
+the API, follow these steps:
+
+1. Open the Google Cloud Console and navigate to the 
+[APIs & Services page](https://console.cloud.google.com/apis/dashboard).
+1. Click the + ENABLE APIS AND SERVICES button at the top of the page.
+1. Using the search box at the top of the page, search for Tag Manager API
+1. Click the resulting card labeled Tag Manager API
+1. Click the ENABLE button to enable the API.
+
+You may need to wait a few minutes for the API to be usable after enabling it.
+
+## Serving the Solution Website
+
+There are a number of ways to serve the solution website. The simplest is to use
+your local computer. Below are two ways you can do that from the command line.
+
+Once you have started serving the website open the URL in your browser. For
+example, if you are serving the site from your computer on port 8080, open the
+URL http://localhost:8080.
+
+### Using Python
+
+1. Move to the directory you downloaded the solution to using (e.g. cd
+   cwv_from_ga4_exports)
+1. Type python -m http.server <PORT> where <PORT> is the port number specified
+   when setting up the OAuth Client ID.
+
+### Using NodeJS
+
+1. Install the http-server module by typing sudo npm i -g http-server
+1. Move to the directory you downloaded the solution to.
+1. Type http-server . -p <PORT> where <PORT> is the port number specified when
+   setting up the OAuth Client ID.
+
+## Deploying to GTM
+
+The web vitals tag is deployed to GTM via the solution website. Once the site is
+open, fill in the form and click the **Deploy GTM Tag** button. When asked,
+authorize the app to make changes to your GTM workspace (this may be asked
+multiple times).
+
+You can find the information you will need in the following places:
+
+<dl> 
+<dt>OAuth Client ID</dt>
+<dd>Found in the Cloud Console under __API &
+Services >> Credentials__ (created in the prerequisites).  <dt>GTM Workspace
+URL</dt> <dd>The URL of the overview page for the GTM workspace you will be
+deploying to.</dd> <dt>GA4 Measurement ID</dt> <dd>Found on your GA4 property
+under __Admin >> Data Streams__ along with the details for the Web Stream being
+used to collect the data. It will start with "G-".</dd> </dl>
+
+As the parts are deployed, success messages will be displayed on the page. Once
+the All Done message is displayed, open the GTM workspace you deployed to in
+your browser. Check if all of the changes are acceptable and don't conflict with
+anything else you're currently working on. If everything is good, submit the
+changes and deploy the new version of the GTM container to start collecting Core
+Web Vitals for your website.
+
 ## Possible Issues
 * Deploying the template a second time results in an **400 BAD REQUEST** error
   on the first step without any additional context. To remedy this, delete the
   template from the container and start again.
+
+<!--  LocalWords:  GTM OAuth tagmanager localhost APIs
+ -->

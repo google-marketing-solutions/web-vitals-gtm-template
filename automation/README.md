@@ -127,15 +127,23 @@ You can find the information you will need in the following places:
 
 <dl> 
 <dt>OAuth Client ID</dt>
-<dd>Found in the Cloud Console under __API &
-Services >> Credentials__ (created in the prerequisites).  <dt>GTM Workspace
-URL</dt> <dd>The URL of the overview page for the GTM workspace you will be
-deploying to.</dd> <dt>GA4 Measurement ID</dt> <dd>Found on your GA4 property
-under __Admin >> Data Streams__ along with the details for the Web Stream being
-used to collect the data. It will start with "G-".</dd> </dl>
+<dd>Found in the Cloud Console under __API & Services >> Credentials__ (created
+in the prerequisites).
+<dt>GTM Workspace URL</dt>
+<dd>The URL of the overview page for the GTM workspace you will be deploying to.
+</dd>
+<dt>GA4 Measurement ID</dt>
+<dd>Found on your GA4 property under __Admin >> Data Streams__ along with the
+details for the Web Stream being used to collect the data. It will start with
+"G-".</dd>
+<dt>Template File</dt>
+<dd>This is the `template.tpl` file included with the solution. It is included
+in the solution when cloned and can be found at the root of the cloned
+directory.</dd>
+</dl>
 
 As the parts are deployed, success messages will be displayed on the page. Once
-the All Done message is displayed, open the GTM workspace you deployed to in
+the **All Done** message is displayed, open the GTM workspace you deployed to in
 your browser. Check if all of the changes are acceptable and don't conflict with
 anything else you're currently working on. If everything is good, submit the
 changes and deploy the new version of the GTM container to start collecting Core

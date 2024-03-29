@@ -31,6 +31,11 @@ limitations under the License.
       row-gap: 8px;
     }
 
+    .deploy-form label {
+        display: block;
+        padding-bottom: 0.5ex;
+    }
+
     .submit-button {
       width: fit-content;
       padding: 5px;
@@ -44,7 +49,6 @@ limitations under the License.
       border: 1px solid #e3e3e3;
       border-radius: 4px;
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
-      display: none;
     }
 
     form:has(input.template-choice:checked) .well {
@@ -87,15 +91,13 @@ limitations under the License.
       GA4 Measurement ID:
       <input type="text" name="ga4-id" id="ga4-id" required>
     </label>
-    <label>
-      Deploy the template to GTM (uncheck if template already deployed)?
-      <input type="checkbox" name="deploy-template" id="deploy-template" checked class="template-choice">
-    </label>
+    <h2>GTM Template Options</h2>
     <div class="well">
       <label>
         Template File <input type="file" id="template-file" name="template-file" accept=".tpl" required>
       </label>
-      Choose the CWV metrics to report:
+      <br>
+      <strong>Choose the CWV metrics to report:</strong>
       <ul class="bulletless">
         <li>
         <label>
@@ -139,7 +141,7 @@ limitations under the License.
       </label>
       </div>
       <label>
-        Use attribution build of the web-vitals library?
+        Use the attribution build of the web-vitals library?
         <input type="checkbox" checked name="use-attribution" id="use-attribution">
       </label>
       <label>

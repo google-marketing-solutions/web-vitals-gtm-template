@@ -19,7 +19,7 @@ let tokenClient;
 
 // the GTM variables we will create. This is augmented with 'attribution' if
 // the attribution build is used.
-const VariableNames = [
+const VARIABLE_NAMES = [
   'name',
   'id',
   'rating',
@@ -109,9 +109,9 @@ function authorizeApp(event) {
 function runDeployment() {
   lockForm();
   // set up the global config
-  const gtmURL = document.getElementById('gtm-url').value;
+  const gtmUrl = document.getElementById('gtm-url').value;
   const config = new Map();
-  config.set('parent', gtmURL.substring(gtmURL.indexOf('accounts')));
+  config.set('parent', gtmUrl.substring(gtmUrl.indexOf('accounts')));
   config.set('ga4ID', document.getElementById('ga4-id').value);
   config.set('metrics', new Map(Object.entries({
     ttfb: document.getElementById('cwv-TTFB').checked.toString(),
@@ -157,8 +157,8 @@ function createTemplate(config, content) {
     })
       .then((gtmResp) => {
         addSuccessMessage('Created Web Vitals Template');
-        const templateID = gtmResp.result.templateId;
-        createTag(config, templateID);
+        const templateId = gtmResp.result.templateId;
+        createTag(config, templateId);
       })
       .catch((err) => {
         addErrorMessage('Error creating template:', JSON.stringify(err));
@@ -180,17 +180,17 @@ function createTemplate(config, content) {
  * If the tag is successfully created, `createEventTrigger` is called.
  *
  * @param config {Map<string, *>} The configuration map.
- * @param templateID {string} The ID the template was assigned when it was
+ * @param templateId {string} The ID the template was assigned when it was
  * created.
  */
-function createTag(config, templateID) {
-  const containerID = config.get('parent').split('/')[3];
+function createTag(config, templateId) {
+  const containerId = config.get('parent').split('/')[3];
   const metrics = config.get('metrics');
   const tag = {
     parent: config.get('parent'),
     resource: {
       name: 'Web Vitals Tag',
-      type: 'cvt_' + containerID + '_' + templateID,
+      type: 'cvt_' + containerId + '_' + templateId,
       firingTriggerId: [
         "2147479553" // Trigger ID for standard "All Pages" trigger
       ],
@@ -347,11 +347,11 @@ function createEventTrigger(config) {
  */
 function createDatalayerVariables(config) {
   if (config.get('attributionBuild')) {
-    VariableNames.push('attribution');
+    VARIABLE_NAMES.push('attribution');
   }
 
   let count = 0;
-  for (const name of VariableNames) {
+  for (const name of VARIABLE_NAMES) {
     gapi.client.tagmanager.accounts.containers.workspaces.variables.create({
       parent: config.get('parent'),
       resource: {
@@ -379,7 +379,7 @@ function createDatalayerVariables(config) {
     })
       .then((gtmResp) => {
         addSuccessMessage('Created data layer variable -', name);
-        if (++count === VariableNames.length) {
+        if (++count === VARIABLE_NAMES.length) {
           addSuccessMessage('Finished creating data layer variables');
           createGA4EventTag(config);
         }
@@ -404,7 +404,7 @@ function createDatalayerVariables(config) {
  */
 function createGA4EventTag(config) {
   const eventParams = [];
-  for (const v of VariableNames) {
+  for (const v of VARIABLE_NAMES) {
     if (v === 'name') continue;
     eventParams.push({
       type: 'map',

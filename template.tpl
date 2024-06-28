@@ -229,7 +229,7 @@ const Object = require('Object');
 const log = require('logToConsole');
 
 // Variables storing information from user input.
-const packageBuild = (data.build === 'standard') ? 'https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js' : 'https://unpkg.com/web-vitals@3/dist/web-vitals.attribution.iife.js';
+const packageBuild = (data.build === 'standard') ? 'https://unpkg.com/web-vitals@4/dist/web-vitals.iife.js' : 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.iife.js';
 const libraryUrl = data.customURL || packageBuild;
 const measureAllMetrics = data.metrics === 'allMetrics';
 const dataLayerName = 'dataLayer';

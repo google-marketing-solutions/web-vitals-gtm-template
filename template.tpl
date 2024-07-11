@@ -139,13 +139,6 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "CHECKBOX",
-        "name": "fid",
-        "checkboxText": "FID",
-        "simpleValueType": true,
-        "help": "First Input Delay (FID) measures the time from when a user first interacts with the site to the time when the browser is able to respond to that interaction."
-      },
-      {
-        "type": "CHECKBOX",
         "name": "cls",
         "checkboxText": "CLS",
         "simpleValueType": true,
@@ -268,7 +261,6 @@ const loadwebVitals = () => {
   if (webVitalsGlobal && typeof webVitalsGlobal === 'object') {
     if (data.cls || data.metrics === 'allMetrics') webVitalsGlobal.onCLS(pushData);
     if (data.fcp || data.metrics === 'allMetrics') webVitalsGlobal.onFCP(pushData);
-    if (data.fid || data.metrics === 'allMetrics') webVitalsGlobal.onFID(pushData);
     if (data.inp || data.metrics === 'allMetrics') webVitalsGlobal.onINP(pushData);
     if (data.lcp || data.metrics === 'allMetrics') webVitalsGlobal.onLCP(pushData);
     if (data.ttfb || data.metrics === 'allMetrics') webVitalsGlobal.onTTFB(pushData);

@@ -35,8 +35,8 @@ ___TEMPLATE_PARAMETERS___
     "displayName": "Choose how to load the library",
     "radioItems": [
       {
-        "value": "unpkg",
-        "displayValue": "Load library from unpkg.com"
+        "value": "cdn",
+        "displayValue": "Load library from a CDN"
       },
       {
         "value": "custom",
@@ -44,7 +44,7 @@ ___TEMPLATE_PARAMETERS___
       }
     ],
     "simpleValueType": true,
-    "help": "Load the web vitals library from the unpkg.com CDN or use a custom URL to load the library."
+    "help": "Load the web vitals library from a CDN or use a custom URL to load the library."
   },
   {
     "type": "LABEL",
@@ -85,6 +85,34 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "RADIO",
+    "name": "cdn",
+    "displayName": "Choose a CDN",
+    "radioItems": [
+      {
+        "value": "unpkg",
+        "displayValue": "unpkg.com"
+      },
+      {
+        "value": "jsDelivr",
+        "displayValue": "jsDelivr"
+      },
+      {
+        "value": "cdnjs",
+        "displayValue": "cdnjs"
+      }
+    ],
+    "simpleValueType": true,
+    "enablingConditions": [
+      {
+        "paramName": "libraryConfig",
+        "paramValue": "cdn",
+        "type": "EQUALS"
+      }
+    ],
+    "help": "Choose between different CDNs."
+  },
+  {
+    "type": "RADIO",
     "name": "build",
     "displayName": "Build options",
     "radioItems": [
@@ -101,7 +129,7 @@ ___TEMPLATE_PARAMETERS___
     "enablingConditions": [
       {
         "paramName": "libraryConfig",
-        "paramValue": "unpkg",
+        "paramValue": "cdn",
         "type": "EQUALS"
       }
     ],
@@ -221,9 +249,26 @@ const createQueue = require('createQueue');
 const Object = require('Object');
 const log = require('logToConsole');
 
+// Library URLs from CDNs
+const cdnUrl = {
+  'unpkg': {
+    'standard': 'https://unpkg.com/web-vitals@4/dist/web-vitals.iife.js',
+    'attribution': 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.iife.js'
+  },
+  'jsDelivr': {
+    'standard': 'https://cdn.jsdelivr.net/npm/web-vitals@4/dist/web-vitals.iife.js',
+    'attribution': 'https://cdn.jsdelivr.net/npm/web-vitals@4/dist/web-vitals.attribution.iife.js'
+  },
+  'cdnjs': {
+    'standard': 'https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js',
+    'attribution': 'https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.attribution.iife.js'
+  }
+};
+
 // Variables storing information from user input.
-const packageBuild = (data.build === 'standard') ? 'https://unpkg.com/web-vitals@4/dist/web-vitals.iife.js' : 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.iife.js';
-const libraryUrl = data.customURL || packageBuild;
+const cdnProvider = data.cdn;
+const buildOption = data.build;
+const libraryUrl = data.customURL || cdnUrl[cdnProvider][buildOption];
 const measureAllMetrics = data.metrics === 'allMetrics';
 const dataLayerName = 'dataLayer';
 const eventName = data.customEventName || 'web_vitals';
@@ -292,6 +337,14 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "https://unpkg.com/web-vitals*"
+              },
+              {
+                "type": 1,
+                "string": "https://cdn.jsdelivr.net/npm/web-vitals*"
+              },
+              {
+                "type": 1,
+                "string": "https://cdnjs.cloudflare.com/ajax/libs/web-vitals*"
               }
             ]
           }

@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+### 2025-02-06
+
+- Add support for jsDelivr and cdnjs, next to unpkg.com.
+
 ### 2024-07-12
 
 - Update web-vitals.js to version 4, in case the library is loaded from the unpkg.com domain and removed FID from the Tag Template ([#8](https://github.com/google-marketing-solutions/web-vitals-gtm-template/pull/8)).
@@ -12,6 +16,6 @@ Make sure to rename your dataLayer variables in your Google Tag Manager containe
 
 - Adding automation ([#7](https://github.com/google-marketing-solutions/web-vitals-gtm-template/pull/7)). 
 
-### 2024-12-15
+### 2023-07-07
 
 - Initial release.

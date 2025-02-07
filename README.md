@@ -46,8 +46,9 @@ For a **quick start** you can leave the default settings as they are and just ad
 
 For a **customized setup** you have different options to choose from:
 
-- **Choose how to load the library:** You can load the web vitals library from the unpkg.com CDN or use a custom URL to load the library. **[For the latter please consider these instructions.](#load-library-from-a-custom-url)**
-- **Build options:** When loading the library from the unpkg.com CDN you can choose between two different [build options](https://github.com/GoogleChrome/web-vitals#build-options). To get started use the standard built, to collect additional diagnostic information use the attribution build.
+- **Choose how to load the library:** You can load the web vitals library from a CDN or use a custom URL to load the library. **[For the latter please consider these instructions.](#load-library-from-a-custom-url)**
+- **Choose a CDN:** Choose between unpkg.com, jsDelivr and cdnjs as the provider of the web vitals library.
+- **Build options:** When loading the library from a CDN you can choose between two different [build options](https://github.com/GoogleChrome/web-vitals#build-options). To get started use the standard built, to collect additional diagnostic information use the attribution build.
 - **Metrics configuration:** Choose which metrics you want to measure. You can measure all metrics. Alternatively choose separately between the following metrics.
     + [Cumulative Layout Shift (CLS)](https://web.dev/cls/)
     + [First Input Delay (FID)](https://web.dev/fid/)

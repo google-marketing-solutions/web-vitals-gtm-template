@@ -90,15 +90,15 @@ ___TEMPLATE_PARAMETERS___
     "radioItems": [
       {
         "value": "unpkg",
-        "displayValue": "unpkg.com"
+        "displayValue": "unpkg.com (latest v5.x)"
       },
       {
         "value": "jsDelivr",
-        "displayValue": "jsDelivr"
+        "displayValue": "jsDelivr (latest v5.x)"
       },
       {
         "value": "cdnjs",
-        "displayValue": "cdnjs"
+        "displayValue": "cdnjs (v4.2.4)"
       }
     ],
     "simpleValueType": true,

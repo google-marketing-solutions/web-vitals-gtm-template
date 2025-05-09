@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### 2025-05-09
+
+- Update web-vitals.js to version 5, in case the library is loaded from one of the CDNs
+- Please see the CHANGELOG of web-vitals.js for more details: https://github.com/GoogleChrome/web-vitals/blob/main/CHANGELOG.md
+- Changes as detailed in the upgrading doc: https://github.com/GoogleChrome/web-vitals/blob/main/docs/upgrading-to-v5.md
+
 ### 2025-02-06
 
 - Add support for jsDelivr and cdnjs, next to unpkg.com.

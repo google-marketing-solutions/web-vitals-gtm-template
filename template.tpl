@@ -252,12 +252,12 @@ const log = require('logToConsole');
 // Library URLs from CDNs
 const cdnUrl = {
   'unpkg': {
-    'standard': 'https://unpkg.com/web-vitals@4/dist/web-vitals.iife.js',
-    'attribution': 'https://unpkg.com/web-vitals@4/dist/web-vitals.attribution.iife.js'
+    'standard': 'https://unpkg.com/web-vitals@5/dist/web-vitals.iife.js',
+    'attribution': 'https://unpkg.com/web-vitals@5/dist/web-vitals.attribution.iife.js'
   },
   'jsDelivr': {
-    'standard': 'https://cdn.jsdelivr.net/npm/web-vitals@4/dist/web-vitals.iife.js',
-    'attribution': 'https://cdn.jsdelivr.net/npm/web-vitals@4/dist/web-vitals.attribution.iife.js'
+    'standard': 'https://cdn.jsdelivr.net/npm/web-vitals@5/dist/web-vitals.iife.js',
+    'attribution': 'https://cdn.jsdelivr.net/npm/web-vitals@5/dist/web-vitals.attribution.iife.js'
   },
   'cdnjs': {
     'standard': 'https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js',

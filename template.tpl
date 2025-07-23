@@ -98,7 +98,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "value": "cdnjs",
-        "displayValue": "cdnjs (v4.2.4)"
+        "displayValue": "cdnjs (v5.0.3)"
       }
     ],
     "simpleValueType": true,
@@ -260,8 +260,8 @@ const cdnUrl = {
     'attribution': 'https://cdn.jsdelivr.net/npm/web-vitals@5/dist/web-vitals.attribution.iife.js'
   },
   'cdnjs': {
-    'standard': 'https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.iife.js',
-    'attribution': 'https://cdnjs.cloudflare.com/ajax/libs/web-vitals/4.2.4/web-vitals.attribution.iife.js'
+    'standard': 'https://cdnjs.cloudflare.com/ajax/libs/web-vitals/5.0.3/web-vitals.iife.js',
+    'attribution': 'https://cdnjs.cloudflare.com/ajax/libs/web-vitals/5.0.3/web-vitals.attribution.iife.js'
   }
 };
 

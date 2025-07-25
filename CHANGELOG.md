@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+### 2025-07-23
+
+- Loading version 5 (5.0.3) from cdnjs
+- ⚠️ Version 5 includes **breaking changes**. See the changelog from 2025-05-09 for details.
+
 ### 2025-05-09
 
 - Update web-vitals.js to **version 5**, in case the library is loaded from unpkg.com or jsDelivr.
